@@ -1,0 +1,25 @@
+{
+    "name": "gelembjuk/xing",
+    "description": "PHP Package to work with Xing API. Supports oAuth1 login with Xing and then uses an access token to interact with the API",
+    "keywords": [
+        "social login",
+        "xing",
+        "xing api"
+    ],
+    "require": {
+		"league/oauth1-client": "^1.5",
+        "gelembjuk/logger": "1.*"
+    },
+    "require-dev":{},
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roman Gelembjuk",
+            "email": "roman@gelembjuk.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Gelembjuk":"src/" }
+    },
+    "minimum-stability": "stable"
+}
