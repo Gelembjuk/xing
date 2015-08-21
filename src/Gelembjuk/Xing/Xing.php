@@ -22,6 +22,7 @@ namespace Gelembjuk\Xing;
 
 class Xing extends XingOAuth
 {
+    use \Gelembjuk\Logger\ApplicationLogger;
     /**
      * Access token
      * 

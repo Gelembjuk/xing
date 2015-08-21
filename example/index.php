@@ -1,15 +1,15 @@
 <?php 
 
 /**
- * Example. Usage of Gelembjuk/Auth/SocialLogin library to login to a web site with social networks
+ * Example. Usage of Gelembjuk/Xing/Xing library to work with Xing API
  * 
- * This is the file index.php . It shows a user login status and displays login links if a user is not in a system yet
- * 
- * This example is part of gelembjuk/auth package by Roman Gelembjuk (@gelembjuk)
+ * This example is part of gelembjuk/xing package by Roman Gelembjuk (@gelembjuk)
  */
 
 // settings and composer autoloader connection are in a separate file
 require('init.php');
+
+$xing = new \Gelembjuk\Xing\Xing($integrations['xing']['consumer_key'],$integrations['xing']['consumer_secret']);
 
 if($_REQUEST['action'] == 'logout') {
 	unset($_SESSION['token']);
@@ -17,7 +17,7 @@ if($_REQUEST['action'] == 'logout') {
 	header('Location: index.php');
         exit;
 } elseif ($_SESSION['token']) {
-	$xing = new \Gelembjuk\Xing\Xing($integrations['xing']['consumer_key'],$integrations['xing']['consumer_secret']);
+	
 	$xing->setToken($_SESSION['token']);
 	
 	$user = $xing->getMe();
@@ -44,7 +44,7 @@ if($_REQUEST['action'] == 'logout') {
 
 	$redirecturl = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'/index.php?action=completelogin&';
 
-	$xing = new \Gelembjuk\Xing\Xing($integrations['xing']['consumer_key'],$integrations['xing']['consumer_secret'],$redirecturl);
+	$xing->setRedirectUrl($redirecturl);
 	
 	$redirect = $xing->getAuthUrl();
 
@@ -53,8 +53,6 @@ if($_REQUEST['action'] == 'logout') {
 	header('Location: '.$redirect);
         exit;
 } elseif($_REQUEST['action'] == 'completelogin') {
-	
-	$xing = new \Gelembjuk\Xing\Xing($integrations['xing']['consumer_key'],$integrations['xing']['consumer_secret']);
 	
 	$xing->setTempCredentials($_SESSION['temporary_credentials']);
 	
