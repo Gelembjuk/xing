@@ -11,6 +11,12 @@ require('init.php');
 
 $xing = new \Gelembjuk\Xing\Xing($integrations['xing']['consumer_key'],$integrations['xing']['consumer_secret']);
 
+// create logger object
+$logger = new \Gelembjuk\Logger\FileLogger(
+	array('logfile' => dirname(__FILE__).'/tmp/log.txt','groupfilter' => 'debug'));
+	
+$xing->setLogger($logger);
+
 if($_REQUEST['action'] == 'logout') {
 	unset($_SESSION['token']);
 	

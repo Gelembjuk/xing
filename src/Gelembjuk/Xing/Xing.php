@@ -226,6 +226,8 @@ class Xing extends XingOAuth
                 $data = array();
         }
 
+        $this->debug('API url '.$url.' and method '.$method);
+
         $headers = $this->getHeaders($this->token, $method, $url, $data);
 
         try {
