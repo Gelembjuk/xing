@@ -22,9 +22,27 @@ namespace Gelembjuk\Xing;
 
 class Xing extends XingOAuth
 {
+    /**
+     * Access token
+     * 
+     * @var string
+     */
     protected $token;
+    
+    /**
+     * Temporary credentials for oAuth1 process
+     * 
+     * @var mixed
+     */
     protected $temporarycredentials = null;
     
+    /**
+     * Constructor. Accepts consumer credentials and convert to format of \League\OAuth1 package
+     * 
+     * @param string $consumer_key Consumer key from Xing API
+     * @param string $consumer_secret Consumer secret key from Xing API
+     * @param string $callback_url Redirect url for oauth1 process. Is needed only on the first step of oauth process
+     */
     public function __construct($consumer_key, $consumer_secret, $callback_url = '')
     {
         $credentials = array(
@@ -48,6 +66,7 @@ class Xing extends XingOAuth
     {
         return $this->temporarycredentials;
     }
+    
     public function setTempCredentials($temporarycredentials)
     {
         $this->temporarycredentials = $temporarycredentials;

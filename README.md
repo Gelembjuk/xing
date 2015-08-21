@@ -1,6 +1,8 @@
 ## Gelembjuk/Xing package
 
-PHP Package to work with Xing API
+PHP Package to work with Xing API. 
+
+This is Alpha version. It works but not all xing API methods are supported. No unit testing yet
 
 ### Configuration
 
@@ -66,7 +68,7 @@ End of oAuth1 process. A user is redirected from xing back to your web site
 
 ```php
 	
-	$xing = new Gelembjuk\Xing\Xing($consumer_key,$consumer_secret,$redirecturl);
+	$xing = new Gelembjuk\Xing\Xing($consumer_key,$consumer_secret);
 	
 	$xing->setTempCredentials($_SESSION['temporary_credentials']);
 	
