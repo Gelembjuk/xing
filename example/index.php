@@ -20,15 +20,24 @@ if($_REQUEST['action'] == 'logout') {
 	$xing = new \Gelembjuk\Xing\Xing($integrations['xing']['consumer_key'],$integrations['xing']['consumer_secret']);
 	$xing->setToken($_SESSION['token']);
 	
-	$user = $xing->getUserProfile();
+	$user = $xing->getMe();
 	
 	// user is already in the system. Show view for authorized users
-	echo '<h2>Hello '.$user->name.'</h2>';
+	echo '<h2>Hello '.$user['display_name'].'</h2>';
 	echo '<p> <a href="index.php?action=logout">Logout</a></p>';
 	
 	echo '<p>Run tests:</p>';
+
+	// find 3 users with name last name Berger
+	echo 'Find users by keyword `Berger`:<br>';
+	$foundusers = $xing->getFindusers('Berger','3');
 	
+	echo 'Found ' . $foundusers['users']['total'].' users<br>';
 	
+	foreach ($foundusers['users']['items'] as $user) {
+		$userrecord = 	$xing->getUser($user['user']['id']);
+		echo $userrecord['display_name'].' with ID '.$userrecord['id'].'<br>';
+	}
 	
 	exit;
 } elseif($_REQUEST['action'] == 'login') {
